@@ -18,7 +18,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'username',
+        'username',   // Ensure username is here if you use it for login
+        'email',      // Add email here
         'password',
         'role',
     ];
@@ -34,14 +35,14 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
+            'email_verified_at' => 'datetime',   // This is for email verification, if applicable
             'password' => 'hashed',
         ];
     }
@@ -50,6 +51,7 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
     public function quizAttempts()
     {
         return $this->hasMany(QuizAttempt::class);
